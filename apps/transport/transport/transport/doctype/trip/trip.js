@@ -11,6 +11,37 @@ frappe.ui.form.on("Trip", {
 			frm.add_custom_button(__("Mark as Delivered"), () => {
 				frm.call("complete_trip").then(() => frm.reload_doc());
 			}, __("Actions"));
+
+			// Checkpoint quick-add buttons
+			const checkpoints = ["In Transit", "At Border", "At Checkpoint", "Arrived at Destination", "Delayed"];
+			checkpoints.forEach((cp) => {
+				frm.add_custom_button(__(cp), () => {
+					let d = new frappe.ui.Dialog({
+						title: __("Add Checkpoint: " + cp),
+						fields: [
+							{ fieldname: "location", fieldtype: "Data", label: "Location" },
+							{ fieldname: "notes", fieldtype: "Data", label: "Notes" },
+						],
+						primary_action_label: __("Add"),
+						primary_action(values) {
+							frm.call("add_checkpoint", {
+								checkpoint_type: cp,
+								location: values.location,
+								notes: values.notes,
+							}).then(() => {
+								d.hide();
+								frm.reload_doc();
+							});
+						},
+					});
+					d.show();
+				}, __("Track"));
+			});
+
+			// Log Fuel button
+			frm.add_custom_button(__("Log Fuel"), () => {
+				frappe.new_doc("Fuel Log", { trip: frm.doc.name, truck: frm.doc.truck, driver: frm.doc.driver });
+			}, __("Actions"));
 		}
 
 		if (frm.doc.status === "Completed") {
@@ -26,28 +57,35 @@ frappe.ui.form.on("Trip", {
 		}
 
 		// Color the status indicator
-		if (frm.doc.status === "Draft") {
-			frm.page.set_indicator(__("Draft"), "grey");
-		} else if (frm.doc.status === "In Progress") {
-			frm.page.set_indicator(__("In Progress"), "blue");
-		} else if (frm.doc.status === "Completed") {
-			frm.page.set_indicator(__("Completed"), "green");
-		} else if (frm.doc.status === "Closed") {
-			frm.page.set_indicator(__("Closed"), "darkgrey");
-		} else if (frm.doc.status === "Cancelled") {
-			frm.page.set_indicator(__("Cancelled"), "red");
+		const status_colors = {
+			Draft: "grey",
+			"In Progress": "blue",
+			Completed: "green",
+			Closed: "darkgrey",
+			Cancelled: "red",
+		};
+		if (status_colors[frm.doc.status]) {
+			frm.page.set_indicator(__(frm.doc.status), status_colors[frm.doc.status]);
 		}
 
-		// Budget status indicator
+		// Budget status headline
 		if (frm.doc.budget_status === "Over Budget") {
 			frm.dashboard.set_headline(
-				__('<span style="color: red; font-weight: bold;">⚠ Over Budget by {0}%</span>',
+				__('<span style="color:red;font-weight:bold;">Over Budget by {0}%</span>',
 					[Math.abs(frm.doc.variance_percentage).toFixed(1)])
 			);
 		} else if (frm.doc.budget_status === "Under Budget") {
 			frm.dashboard.set_headline(
-				__('<span style="color: green; font-weight: bold;">✓ Under Budget by {0}%</span>',
+				__('<span style="color:green;font-weight:bold;">Under Budget by {0}%</span>',
 					[Math.abs(frm.doc.variance_percentage).toFixed(1)])
+			);
+		}
+
+		// Late delivery warning
+		if (frm.doc.is_late) {
+			frm.dashboard.set_headline(
+				__('<span style="color:red;font-weight:bold;">LATE - Delayed by {0} hours</span>',
+					[frm.doc.delay_hours ? frm.doc.delay_hours.toFixed(1) : "?"])
 			);
 		}
 
@@ -65,9 +103,27 @@ frappe.ui.form.on("Trip", {
 			});
 		}
 	},
+
+	// Auto-fetch rate when route changes
+	route(frm) {
+		if (frm.doc.customer && frm.doc.route && !frm.doc.revenue) {
+			frappe.call({
+				method: "transport.transport.doctype.transport_rate_card.transport_rate_card.get_applicable_rate",
+				args: { customer: frm.doc.customer, route: frm.doc.route },
+				callback(r) {
+					if (r.message) {
+						frm.set_value("rate_card", r.message.name);
+						frappe.show_alert({
+							message: __("Rate card {0} applied", [r.message.name]),
+							indicator: "green",
+						});
+					}
+				},
+			});
+		}
+	},
 });
 
-// Auto-populate actual cost rows from planned costs
 frappe.ui.form.on("Trip Planned Cost", {
 	planned_amount(frm) {
 		frm.trigger("validate");

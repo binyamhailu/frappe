@@ -50,25 +50,19 @@ if [ ! -d "sites/${SITE_NAME}" ]; then
     echo "Installing Transport module..."
     bench --site "${SITE_NAME}" install-app transport
 
-    # Load demo data
-    echo "Loading demo data..."
-    if [ -f "/home/frappe/setup_site.py" ]; then
-        cp /home/frappe/setup_site.py "$BENCH_DIR/apps/transport/transport/setup_site.py"
-    fi
-    bench --site "${SITE_NAME}" execute transport.setup_and_test.run 2>/dev/null || \
-    bench --site "${SITE_NAME}" execute transport.setup_site.run 2>/dev/null || \
-    echo "Note: Demo data not loaded. You can load it manually later."
-
     echo ""
     echo "============================================"
     echo ""
-    echo "  ERP is ready!"
+    echo "  ERP is ready! (clean install)"
     echo ""
     echo "  URL:      http://localhost:8000"
     echo "  User:     Administrator"
     echo "  Password: ${ADMIN_PASSWORD}"
     echo ""
-    echo "  Transport Module: http://localhost:8000/app/transport"
+    echo "  Transport: http://localhost:8000/app/transport"
+    echo ""
+    echo "  To load demo data, run:"
+    echo "  docker exec -it erp-app bench --site erp.localhost execute transport.demo.load"
     echo ""
     echo "============================================"
     echo ""

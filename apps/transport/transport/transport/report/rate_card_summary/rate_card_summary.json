@@ -1,0 +1,15 @@
+{
+  "add_total_row": 0,
+  "creation": "2026-03-31 12:00:00.000000",
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "Yes",
+  "module": "Transport",
+  "name": "Rate Card Summary",
+  "owner": "Administrator",
+  "ref_doctype": "Transport Rate Card",
+  "report_name": "Rate Card Summary",
+  "report_type": "Script Report",
+  "roles": [{"role": "System Manager"}]
+}

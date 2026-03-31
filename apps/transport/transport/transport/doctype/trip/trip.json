@@ -21,6 +21,16 @@
     "actual_start_date",
     "actual_end_date",
     "delivery_confirmation_date",
+    "section_break_tracking",
+    "checkpoints",
+    "last_checkpoint",
+    "column_break_tracking2",
+    "is_late",
+    "delay_hours",
+    "section_break_ratecard",
+    "rate_card",
+    "column_break_ratecard2",
+    "rate_applied",
     "section_break_planned_costs",
     "planned_costs",
     "total_planned_cost",
@@ -260,6 +270,62 @@
       "label": "Delivery Notes"
     },
     {
+      "fieldname": "section_break_tracking",
+      "fieldtype": "Section Break",
+      "label": "Trip Tracking"
+    },
+    {
+      "fieldname": "checkpoints",
+      "fieldtype": "Table",
+      "label": "Checkpoints",
+      "options": "Trip Checkpoint"
+    },
+    {
+      "fieldname": "last_checkpoint",
+      "fieldtype": "Data",
+      "label": "Last Checkpoint",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_tracking2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "is_late",
+      "fieldtype": "Check",
+      "label": "Late Delivery",
+      "read_only": 1
+    },
+    {
+      "fieldname": "delay_hours",
+      "fieldtype": "Float",
+      "label": "Delay (Hours)",
+      "precision": "1",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_ratecard",
+      "fieldtype": "Section Break",
+      "label": "Rate Card"
+    },
+    {
+      "fieldname": "rate_card",
+      "fieldtype": "Link",
+      "label": "Rate Card",
+      "options": "Transport Rate Card"
+    },
+    {
+      "fieldname": "column_break_ratecard2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "rate_applied",
+      "fieldtype": "Currency",
+      "label": "Rate Applied",
+      "read_only": 1
+    },
+    {
       "fieldname": "amended_from",
       "fieldtype": "Link",
       "hidden": 1,
@@ -274,6 +340,10 @@
   "links": [
     {
       "link_doctype": "Sales Invoice",
+      "link_fieldname": "trip"
+    },
+    {
+      "link_doctype": "Fuel Log",
       "link_fieldname": "trip"
     }
   ],

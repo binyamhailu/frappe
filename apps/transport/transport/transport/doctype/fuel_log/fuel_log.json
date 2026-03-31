@@ -1,0 +1,184 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-31 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "date",
+    "truck",
+    "driver",
+    "column_break_1",
+    "trip",
+    "fuel_station",
+    "odometer_reading",
+    "section_break_fuel",
+    "liters",
+    "cost_per_liter",
+    "column_break_fuel2",
+    "total_cost",
+    "section_break_efficiency",
+    "km_since_last_fill",
+    "consumption_rate",
+    "column_break_eff2",
+    "cost_per_km",
+    "section_break_attach",
+    "receipt",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "hidden": 1,
+      "label": "Naming Series",
+      "options": "FUEL-.YYYY.-.#####"
+    },
+    {
+      "default": "Today",
+      "fieldname": "date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "truck",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Truck",
+      "options": "Truck",
+      "reqd": 1
+    },
+    {
+      "fieldname": "driver",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Driver",
+      "options": "Driver"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "trip",
+      "fieldtype": "Link",
+      "label": "Trip",
+      "options": "Trip"
+    },
+    {
+      "fieldname": "fuel_station",
+      "fieldtype": "Data",
+      "label": "Fuel Station"
+    },
+    {
+      "fieldname": "odometer_reading",
+      "fieldtype": "Float",
+      "label": "Odometer Reading (km)",
+      "precision": "1"
+    },
+    {
+      "fieldname": "section_break_fuel",
+      "fieldtype": "Section Break",
+      "label": "Fuel Details"
+    },
+    {
+      "fieldname": "liters",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "label": "Liters",
+      "precision": "2",
+      "reqd": 1
+    },
+    {
+      "fieldname": "cost_per_liter",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Cost per Liter",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_fuel2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "bold": 1,
+      "fieldname": "total_cost",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Total Cost",
+      "read_only": 1
+    },
+    {
+      "collapsible": 1,
+      "fieldname": "section_break_efficiency",
+      "fieldtype": "Section Break",
+      "label": "Efficiency (Auto-calculated)"
+    },
+    {
+      "fieldname": "km_since_last_fill",
+      "fieldtype": "Float",
+      "label": "Km Since Last Fill",
+      "precision": "1",
+      "read_only": 1
+    },
+    {
+      "fieldname": "consumption_rate",
+      "fieldtype": "Float",
+      "label": "Consumption Rate (km/liter)",
+      "precision": "2",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_eff2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "cost_per_km",
+      "fieldtype": "Currency",
+      "label": "Cost per Km",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_attach",
+      "fieldtype": "Section Break",
+      "label": "Attachments & Notes"
+    },
+    {
+      "fieldname": "receipt",
+      "fieldtype": "Attach",
+      "label": "Receipt"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes"
+    }
+  ],
+  "links": [],
+  "modified": "2026-03-31 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Transport",
+  "name": "Fuel Log",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "date",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

@@ -1,0 +1,61 @@
+{
+  "actions": [],
+  "creation": "2026-03-31 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "checkpoint_type",
+    "timestamp",
+    "location",
+    "notes",
+    "updated_by"
+  ],
+  "fields": [
+    {
+      "fieldname": "checkpoint_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "Picked Up\nIn Transit\nAt Border\nAt Checkpoint\nArrived at Destination\nDelivered\nDelayed\nIncident",
+      "reqd": 1
+    },
+    {
+      "default": "Now",
+      "fieldname": "timestamp",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "label": "Timestamp",
+      "reqd": 1
+    },
+    {
+      "fieldname": "location",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Location"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Notes"
+    },
+    {
+      "default": "__user",
+      "fieldname": "updated_by",
+      "fieldtype": "Link",
+      "label": "Updated By",
+      "options": "User",
+      "read_only": 1
+    }
+  ],
+  "istable": 1,
+  "links": [],
+  "modified": "2026-03-31 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Transport",
+  "name": "Trip Checkpoint",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "creation",
+  "sort_order": "DESC"
+}

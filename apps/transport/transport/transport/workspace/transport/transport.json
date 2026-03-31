@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"transport_header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Transport & Logistics</b></span>\",\"col\":12}},{\"id\":\"sc_new_order\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Transport Order\",\"col\":3}},{\"id\":\"sc_new_trip\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Trip\",\"col\":3}},{\"id\":\"sc_trip_list\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Trip\",\"col\":3}},{\"id\":\"sc_dashboard\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Transport Dashboard\",\"col\":3}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"masters_header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Masters & Operations</b></span>\",\"col\":12}},{\"id\":\"card_operations\",\"type\":\"card\",\"data\":{\"card_name\":\"Operations\",\"col\":4}},{\"id\":\"card_masters\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"card_reports\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+ "content": "[{\"id\":\"transport_header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Transport & Logistics</b></span>\",\"col\":12}},{\"id\":\"sc_new_order\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Transport Order\",\"col\":3}},{\"id\":\"sc_new_trip\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Trip\",\"col\":3}},{\"id\":\"sc_trip_list\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Trip\",\"col\":3}},{\"id\":\"sc_dashboard\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Transport Dashboard\",\"col\":3}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"masters_header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Masters & Operations</b></span>\",\"col\":12}},{\"id\":\"card_operations\",\"type\":\"card\",\"data\":{\"card_name\":\"Operations\",\"col\":4}},{\"id\":\"card_masters\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"card_fuel\",\"type\":\"card\",\"data\":{\"card_name\":\"Fuel & Costs\",\"col\":4}},{\"id\":\"card_reports\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"card_contracts\",\"type\":\"card\",\"data\":{\"card_name\":\"Contracts\",\"col\":4}}]",
  "creation": "2026-03-30 12:00:00.000000",
  "custom_blocks": [],
  "docstatus": 0,
@@ -81,6 +81,77 @@
    "link_to": "Route",
    "link_type": "DocType",
    "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Fuel & Costs",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Fuel Log",
+   "link_count": 0,
+   "link_to": "Fuel Log",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Fuel Consumption",
+   "link_count": 0,
+   "link_to": "Fuel Consumption",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Fuel Log Register",
+   "link_count": 0,
+   "link_to": "Fuel Log Register",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Contracts",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transport Rate Card",
+   "link_count": 0,
+   "link_to": "Transport Rate Card",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Rate Card Summary",
+   "link_count": 0,
+   "link_to": "Rate Card Summary",
+   "link_type": "Report",
+   "onboard": 0,
    "type": "Link"
   },
   {

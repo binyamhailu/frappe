@@ -34,4 +34,5 @@ override_doctype_dashboards = {
 	"Transport Order": "transport.transport.doctype.transport_order.transport_order_dashboard.get_data",
 	"Truck": "transport.transport.doctype.truck.truck_dashboard.get_data",
 	"Driver": "transport.transport.doctype.driver.driver_dashboard.get_data",
+	"Fuel Log": "transport.transport.doctype.fuel_log.fuel_log_dashboard.get_data",
 }
