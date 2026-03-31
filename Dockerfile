@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     python3-dev \
     redis-tools \
+    rsync \
     xvfb \
     libfontconfig \
     wkhtmltopdf \
@@ -51,9 +52,16 @@ WORKDIR /home/frappe/frappe-bench
 # Get ERPNext
 RUN bench get-app --branch ${ERPNEXT_BRANCH} erpnext
 
-# Copy setup and entrypoint scripts
+# Copy the transport app into the bench and install it
+COPY --chown=frappe:frappe apps/transport ./apps/transport
+RUN echo "transport" >> ./sites/apps.txt \
+    && ./env/bin/pip install -e ./apps/transport --quiet
+
+# Build ALL assets (frappe + erpnext + transport)
+RUN bench build
+
+# Copy entrypoint
 COPY --chown=frappe:frappe entrypoint.sh /home/frappe/entrypoint.sh
-COPY --chown=frappe:frappe setup_site.py /home/frappe/setup_site.py
 RUN chmod +x /home/frappe/entrypoint.sh
 
 EXPOSE 8000 9000

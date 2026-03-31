@@ -12,6 +12,15 @@ bench set-config -g redis_cache "${REDIS_CACHE}"
 bench set-config -g redis_queue "${REDIS_QUEUE}"
 bench set-config -g redis_socketio "${REDIS_CACHE}"
 
+# If transport app source is mounted (for live updates), sync it
+if [ -d "/home/frappe/custom-apps/transport" ]; then
+    echo "Syncing Transport app from mount..."
+    rsync -a --exclude='.git' --exclude='node_modules' --exclude='__pycache__' \
+        /home/frappe/custom-apps/transport/ "$BENCH_DIR/apps/transport/"
+    cd "$BENCH_DIR"
+    ./env/bin/pip install -e ./apps/transport --quiet 2>/dev/null || true
+fi
+
 # Wait for MariaDB
 echo "Waiting for MariaDB..."
 while ! mariadb-admin ping -h"${DB_HOST}" -P"${DB_PORT}" -p"${DB_ROOT_PASSWORD}" --silent 2>/dev/null; do
@@ -21,7 +30,13 @@ echo "MariaDB is ready!"
 
 # Create site if it doesn't exist
 if [ ! -d "sites/${SITE_NAME}" ]; then
-    echo "Creating new site: ${SITE_NAME}"
+    echo ""
+    echo "=========================================="
+    echo "  First run - setting up ERPNext site..."
+    echo "  This takes a few minutes."
+    echo "=========================================="
+    echo ""
+
     bench new-site "${SITE_NAME}" \
         --db-host "${DB_HOST}" \
         --db-port "${DB_PORT}" \
@@ -31,50 +46,37 @@ if [ ! -d "sites/${SITE_NAME}" ]; then
 
     bench use "${SITE_NAME}"
 
-    # Install transport app if available
-    if [ -d "/home/frappe/custom-apps/transport" ]; then
-        echo "Installing Transport module..."
-        cp -r /home/frappe/custom-apps/transport "$BENCH_DIR/apps/transport"
-        cd "$BENCH_DIR/apps/transport"
-        pip install -e . --quiet 2>/dev/null || true
-        cd "$BENCH_DIR"
-        bench --site "${SITE_NAME}" install-app transport
-    fi
+    # Install transport app on the site (creates DB tables)
+    echo "Installing Transport module..."
+    bench --site "${SITE_NAME}" install-app transport
 
-    # Run setup script to create demo data
+    # Load demo data
+    echo "Loading demo data..."
     if [ -f "/home/frappe/setup_site.py" ]; then
-        echo "Loading demo data..."
-        bench --site "${SITE_NAME}" execute transport.setup_and_test.run 2>/dev/null || \
-        bench --site "${SITE_NAME}" execute setup_site.run 2>/dev/null || \
-        echo "Demo data setup skipped (run manually later)"
+        cp /home/frappe/setup_site.py "$BENCH_DIR/apps/transport/transport/setup_site.py"
     fi
+    bench --site "${SITE_NAME}" execute transport.setup_and_test.run 2>/dev/null || \
+    bench --site "${SITE_NAME}" execute transport.setup_site.run 2>/dev/null || \
+    echo "Note: Demo data not loaded. You can load it manually later."
 
     echo ""
     echo "============================================"
-    echo "  ERP Site created successfully!"
+    echo ""
+    echo "  ERP is ready!"
+    echo ""
     echo "  URL:      http://localhost:8000"
     echo "  User:     Administrator"
     echo "  Password: ${ADMIN_PASSWORD}"
+    echo ""
+    echo "  Transport Module: http://localhost:8000/app/transport"
+    echo ""
     echo "============================================"
     echo ""
 else
-    echo "Site ${SITE_NAME} already exists"
+    echo "Site ${SITE_NAME} exists - running migrations..."
     bench use "${SITE_NAME}"
-
-    # Re-copy transport app if updated
-    if [ -d "/home/frappe/custom-apps/transport" ]; then
-        echo "Updating Transport module..."
-        rsync -a --delete /home/frappe/custom-apps/transport/ "$BENCH_DIR/apps/transport/" 2>/dev/null || \
-        cp -r /home/frappe/custom-apps/transport "$BENCH_DIR/apps/transport"
-        cd "$BENCH_DIR/apps/transport"
-        pip install -e . --quiet 2>/dev/null || true
-        cd "$BENCH_DIR"
-        bench --site "${SITE_NAME}" migrate 2>/dev/null || true
-    fi
+    bench --site "${SITE_NAME}" migrate 2>/dev/null || true
 fi
-
-# Build assets
-bench build --app transport 2>/dev/null || true
 
 echo "Starting ERPNext..."
 bench start

@@ -61,11 +61,10 @@ services:
       - "8000:8000"
       - "9000:9000"
     volumes:
-      - bench-data:/home/frappe/frappe-bench
+      - sites-data:/home/frappe/frappe-bench/sites
       - ./apps/transport:/home/frappe/custom-apps/transport:ro
+      - ./setup_site.py:/home/frappe/setup_site.py:ro
     environment:
-      - FRAPPE_BRANCH=version-15
-      - ERPNEXT_BRANCH=version-15
       - DB_HOST=mariadb
       - DB_PORT=3306
       - DB_ROOT_PASSWORD=admin
@@ -78,4 +77,4 @@ services:
 
 volumes:
   mariadb-data:
-  bench-data:
+  sites-data:
