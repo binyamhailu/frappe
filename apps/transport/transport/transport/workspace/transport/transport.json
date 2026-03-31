@@ -1,0 +1,210 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"transport_header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Transport & Logistics</b></span>\",\"col\":12}},{\"id\":\"sc_new_order\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Transport Order\",\"col\":3}},{\"id\":\"sc_new_trip\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Trip\",\"col\":3}},{\"id\":\"sc_trip_list\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Trip\",\"col\":3}},{\"id\":\"sc_dashboard\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Transport Dashboard\",\"col\":3}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"masters_header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Masters & Operations</b></span>\",\"col\":12}},{\"id\":\"card_operations\",\"type\":\"card\",\"data\":{\"card_name\":\"Operations\",\"col\":4}},{\"id\":\"card_masters\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"card_reports\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+ "creation": "2026-03-30 12:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "transport",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Transport",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Operations",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transport Order",
+   "link_count": 0,
+   "link_to": "Transport Order",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Trip",
+   "link_count": 0,
+   "link_to": "Trip",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Master Data",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Truck",
+   "link_count": 0,
+   "link_to": "Truck",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Driver",
+   "link_count": 0,
+   "link_to": "Driver",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Route",
+   "link_count": 0,
+   "link_to": "Route",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Trip Register",
+   "link_count": 0,
+   "link_to": "Trip Register",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Trip Cost vs Plan",
+   "link_count": 0,
+   "link_to": "Trip Cost vs Plan",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Profit per Trip",
+   "link_count": 0,
+   "link_to": "Profit per Trip",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Truck Performance",
+   "link_count": 0,
+   "link_to": "Truck Performance",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Cost Breakdown by Category",
+   "link_count": 0,
+   "link_to": "Cost Breakdown by Category",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Route Profitability",
+   "link_count": 0,
+   "link_to": "Route Profitability",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-03-30 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Transport",
+ "name": "Transport",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "restrict_to_domain": "",
+ "roles": [],
+ "sequence_id": 30.0,
+ "shortcuts": [
+  {
+   "color": "Blue",
+   "doc_view": "New",
+   "label": "New Transport Order",
+   "link_to": "Transport Order",
+   "restrict_to_domain": "",
+   "stats_filter": "",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "New",
+   "label": "New Trip",
+   "link_to": "Trip",
+   "restrict_to_domain": "",
+   "stats_filter": "",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "label": "Trip",
+   "link_to": "Trip",
+   "restrict_to_domain": "",
+   "stats_filter": "",
+   "type": "DocType"
+  },
+  {
+   "color": "Purple",
+   "label": "Transport Dashboard",
+   "link_to": "transport-dashboard",
+   "restrict_to_domain": "",
+   "stats_filter": "",
+   "type": "Page"
+  }
+ ],
+ "title": "Transport"
+}
