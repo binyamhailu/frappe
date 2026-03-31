@@ -54,7 +54,7 @@ RUN bench get-app --branch ${ERPNEXT_BRANCH} erpnext
 
 # Copy the transport app into the bench and install it
 COPY --chown=frappe:frappe apps/transport ./apps/transport
-RUN echo "transport" >> ./sites/apps.txt \
+RUN printf "\ntransport\n" >> ./sites/apps.txt \
     && ./env/bin/pip install -e ./apps/transport --quiet
 
 # Build ALL assets (frappe + erpnext + transport)
