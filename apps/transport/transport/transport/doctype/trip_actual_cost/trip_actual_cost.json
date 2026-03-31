@@ -1,0 +1,76 @@
+{
+  "actions": [],
+  "creation": "2026-03-30 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "cost_type",
+    "description",
+    "planned_amount",
+    "actual_amount",
+    "variance",
+    "receipt",
+    "entered_by"
+  ],
+  "fields": [
+    {
+      "fieldname": "cost_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Cost Type",
+      "options": "Diesel/Fuel\nToll Fees\nPermits\nDriver Allowance\nMileage\nRepairs\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Description"
+    },
+    {
+      "default": "0",
+      "fieldname": "planned_amount",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Planned Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "actual_amount",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Actual Amount",
+      "reqd": 1
+    },
+    {
+      "fieldname": "variance",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Variance",
+      "read_only": 1
+    },
+    {
+      "fieldname": "receipt",
+      "fieldtype": "Attach",
+      "label": "Receipt"
+    },
+    {
+      "default": "__user",
+      "fieldname": "entered_by",
+      "fieldtype": "Link",
+      "label": "Entered By",
+      "options": "User",
+      "read_only": 1
+    }
+  ],
+  "istable": 1,
+  "links": [],
+  "modified": "2026-03-30 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Transport",
+  "name": "Trip Actual Cost",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "creation",
+  "sort_order": "DESC"
+}

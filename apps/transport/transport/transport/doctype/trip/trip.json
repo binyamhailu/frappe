@@ -1,0 +1,305 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-30 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "transport_order",
+    "customer",
+    "customer_name",
+    "status",
+    "column_break_header",
+    "truck",
+    "driver",
+    "route",
+    "section_break_schedule",
+    "planned_start_date",
+    "planned_end_date",
+    "column_break_schedule2",
+    "actual_start_date",
+    "actual_end_date",
+    "delivery_confirmation_date",
+    "section_break_planned_costs",
+    "planned_costs",
+    "total_planned_cost",
+    "section_break_actual_costs",
+    "actual_costs",
+    "total_actual_cost",
+    "section_break_variance",
+    "total_variance",
+    "variance_percentage",
+    "column_break_variance2",
+    "budget_status",
+    "section_break_revenue",
+    "revenue",
+    "sales_invoice",
+    "column_break_revenue2",
+    "gross_profit",
+    "profit_margin",
+    "section_break_notes",
+    "notes",
+    "delivery_notes",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "hidden": 1,
+      "label": "Naming Series",
+      "options": "TRIP-.######"
+    },
+    {
+      "fieldname": "transport_order",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Transport Order",
+      "options": "Transport Order",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "transport_order.customer",
+      "fieldname": "customer",
+      "fieldtype": "Link",
+      "label": "Customer",
+      "options": "Customer",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "transport_order.customer_name",
+      "fieldname": "customer_name",
+      "fieldtype": "Data",
+      "label": "Customer Name",
+      "read_only": 1
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "Draft\nIn Progress\nCompleted\nClosed\nCancelled",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_header",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "truck",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Truck",
+      "options": "Truck",
+      "reqd": 1
+    },
+    {
+      "fieldname": "driver",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Driver",
+      "options": "Driver",
+      "reqd": 1
+    },
+    {
+      "fieldname": "route",
+      "fieldtype": "Link",
+      "label": "Route",
+      "options": "Route"
+    },
+    {
+      "collapsible": 0,
+      "fieldname": "section_break_schedule",
+      "fieldtype": "Section Break",
+      "label": "Schedule"
+    },
+    {
+      "fieldname": "planned_start_date",
+      "fieldtype": "Date",
+      "label": "Planned Start Date"
+    },
+    {
+      "fieldname": "planned_end_date",
+      "fieldtype": "Date",
+      "label": "Planned End Date"
+    },
+    {
+      "fieldname": "column_break_schedule2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "actual_start_date",
+      "fieldtype": "Date",
+      "label": "Actual Start Date"
+    },
+    {
+      "fieldname": "actual_end_date",
+      "fieldtype": "Date",
+      "label": "Actual End Date"
+    },
+    {
+      "depends_on": "eval:doc.status=='Completed' || doc.status=='Closed'",
+      "fieldname": "delivery_confirmation_date",
+      "fieldtype": "Date",
+      "label": "Delivery Confirmation Date"
+    },
+    {
+      "fieldname": "section_break_planned_costs",
+      "fieldtype": "Section Break",
+      "label": "Planned Costs"
+    },
+    {
+      "fieldname": "planned_costs",
+      "fieldtype": "Table",
+      "label": "Planned Costs",
+      "options": "Trip Planned Cost"
+    },
+    {
+      "bold": 1,
+      "fieldname": "total_planned_cost",
+      "fieldtype": "Currency",
+      "label": "Total Planned Cost",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_actual_costs",
+      "fieldtype": "Section Break",
+      "label": "Actual Costs"
+    },
+    {
+      "fieldname": "actual_costs",
+      "fieldtype": "Table",
+      "label": "Actual Costs",
+      "options": "Trip Actual Cost"
+    },
+    {
+      "bold": 1,
+      "fieldname": "total_actual_cost",
+      "fieldtype": "Currency",
+      "label": "Total Actual Cost",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_variance",
+      "fieldtype": "Section Break",
+      "label": "Cost Variance Analysis"
+    },
+    {
+      "bold": 1,
+      "fieldname": "total_variance",
+      "fieldtype": "Currency",
+      "label": "Total Variance",
+      "read_only": 1
+    },
+    {
+      "fieldname": "variance_percentage",
+      "fieldtype": "Percent",
+      "label": "Variance %",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_variance2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "budget_status",
+      "fieldtype": "Select",
+      "label": "Budget Status",
+      "options": "\nUnder Budget\nOn Budget\nOver Budget",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_revenue",
+      "fieldtype": "Section Break",
+      "label": "Revenue & Profitability"
+    },
+    {
+      "fieldname": "revenue",
+      "fieldtype": "Currency",
+      "label": "Revenue (Transport Fee)"
+    },
+    {
+      "fieldname": "sales_invoice",
+      "fieldtype": "Link",
+      "label": "Sales Invoice",
+      "options": "Sales Invoice",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_revenue2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "bold": 1,
+      "fieldname": "gross_profit",
+      "fieldtype": "Currency",
+      "label": "Gross Profit",
+      "read_only": 1
+    },
+    {
+      "fieldname": "profit_margin",
+      "fieldtype": "Percent",
+      "label": "Profit Margin %",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_notes",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text Editor",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "delivery_notes",
+      "fieldtype": "Text Editor",
+      "label": "Delivery Notes"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "hidden": 1,
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Trip",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "is_submittable": 0,
+  "links": [
+    {
+      "link_doctype": "Sales Invoice",
+      "link_fieldname": "trip"
+    }
+  ],
+  "modified": "2026-03-30 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Transport",
+  "name": "Trip",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "quick_entry": 0,
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "title_field": "customer_name",
+  "track_changes": 1
+}

@@ -1,0 +1,8 @@
+frappe-bench/
+deployment/
+*.docx
+.git
+__pycache__
+*.pyc
+node_modules/
+.DS_Store

@@ -1,0 +1,44 @@
+{
+  "actions": [],
+  "creation": "2026-03-30 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "cost_type",
+    "description",
+    "planned_amount"
+  ],
+  "fields": [
+    {
+      "fieldname": "cost_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Cost Type",
+      "options": "Diesel/Fuel\nToll Fees\nPermits\nDriver Allowance\nMileage\nRepairs\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Description"
+    },
+    {
+      "fieldname": "planned_amount",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Planned Amount",
+      "reqd": 1
+    }
+  ],
+  "istable": 1,
+  "links": [],
+  "modified": "2026-03-30 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Transport",
+  "name": "Trip Planned Cost",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "creation",
+  "sort_order": "DESC"
+}

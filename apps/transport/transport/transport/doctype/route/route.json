@@ -1,0 +1,85 @@
+{
+  "actions": [],
+  "autoname": "format:{origin} → {destination}",
+  "creation": "2026-03-30 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "origin",
+    "destination",
+    "column_break_1",
+    "estimated_distance_km",
+    "estimated_time_hours",
+    "section_break_notes",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "origin",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Origin",
+      "reqd": 1
+    },
+    {
+      "fieldname": "destination",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Destination",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "estimated_distance_km",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "label": "Estimated Distance (km)",
+      "precision": "2"
+    },
+    {
+      "fieldname": "estimated_time_hours",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "label": "Estimated Time (Hours)",
+      "precision": "2"
+    },
+    {
+      "fieldname": "section_break_notes",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text",
+      "label": "Notes"
+    }
+  ],
+  "links": [],
+  "modified": "2026-03-30 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Transport",
+  "name": "Route",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "quick_entry": 1,
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "track_changes": 1
+}
