@@ -14,6 +14,12 @@
     "truck",
     "driver",
     "route",
+    "section_break_currency",
+    "transaction_currency",
+    "exchange_rate",
+    "column_break_currency",
+    "budget_amount",
+    "base_budget_amount",
     "section_break_schedule",
     "planned_start_date",
     "planned_end_date",
@@ -45,6 +51,7 @@
     "section_break_revenue",
     "revenue",
     "sales_invoice",
+    "invoice_status",
     "column_break_revenue2",
     "gross_profit",
     "profit_margin",
@@ -85,12 +92,12 @@
       "read_only": 1
     },
     {
-      "default": "Draft",
+      "default": "Planned",
       "fieldname": "status",
       "fieldtype": "Select",
       "in_list_view": 1,
       "label": "Status",
-      "options": "Draft\nIn Progress\nCompleted\nClosed\nCancelled",
+      "options": "Planned\nApproved\nDispatched\nIn Progress\nCompleted\nClosed\nCancelled",
       "reqd": 1
     },
     {
@@ -118,6 +125,44 @@
       "fieldtype": "Link",
       "label": "Route",
       "options": "Route"
+    },
+    {
+      "fieldname": "section_break_currency",
+      "fieldtype": "Section Break",
+      "label": "Currency & Budget"
+    },
+    {
+      "fieldname": "transaction_currency",
+      "fieldtype": "Link",
+      "label": "Transaction Currency",
+      "options": "Currency",
+      "description": "Currency in which this trip's costs and revenue are captured."
+    },
+    {
+      "default": "1",
+      "fieldname": "exchange_rate",
+      "fieldtype": "Float",
+      "label": "Exchange Rate",
+      "precision": "6",
+      "description": "Rate to base currency. 1 = same as base."
+    },
+    {
+      "fieldname": "column_break_currency",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "budget_amount",
+      "fieldtype": "Currency",
+      "label": "Budget Amount",
+      "options": "transaction_currency",
+      "description": "Planning figure — no accounting impact (SRS TRIP-003)."
+    },
+    {
+      "fieldname": "base_budget_amount",
+      "fieldtype": "Currency",
+      "label": "Base Budget Amount",
+      "read_only": 1,
+      "description": "Budget × exchange rate."
     },
     {
       "collapsible": 0,
@@ -235,6 +280,14 @@
       "fieldtype": "Link",
       "label": "Sales Invoice",
       "options": "Sales Invoice",
+      "read_only": 1
+    },
+    {
+      "default": "Not Invoiced",
+      "fieldname": "invoice_status",
+      "fieldtype": "Select",
+      "label": "Invoice Status",
+      "options": "Not Invoiced\nInvoiced\nPartially Paid\nPaid",
       "read_only": 1
     },
     {

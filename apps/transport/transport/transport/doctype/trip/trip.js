@@ -1,7 +1,8 @@
 frappe.ui.form.on("Trip", {
 	refresh(frm) {
 		// Status-based action buttons
-		if (frm.doc.status === "Draft") {
+		const startable = ["Planned", "Approved", "Dispatched", "Draft"];
+		if (startable.includes(frm.doc.status)) {
 			frm.add_custom_button(__("Start Trip"), () => {
 				frm.call("start_trip").then(() => frm.reload_doc());
 			}, __("Actions"));
@@ -58,6 +59,9 @@ frappe.ui.form.on("Trip", {
 
 		// Color the status indicator
 		const status_colors = {
+			Planned: "grey",
+			Approved: "cyan",
+			Dispatched: "orange",
 			Draft: "grey",
 			"In Progress": "blue",
 			Completed: "green",

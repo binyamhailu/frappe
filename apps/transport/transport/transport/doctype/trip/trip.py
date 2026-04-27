@@ -7,7 +7,9 @@ from frappe.utils import flt, getdate, today, now_datetime, time_diff_in_hours
 class Trip(Document):
 	def validate(self):
 		self.validate_transport_order()
+		self.validate_driver_license()
 		self.fetch_rate_card()
+		self.set_defaults_from_settings()
 		self.calculate_planned_totals()
 		self.calculate_actual_costs()
 		self.calculate_variance()
@@ -20,6 +22,31 @@ class Trip(Document):
 			order = frappe.get_doc("Transport Order", self.transport_order)
 			if order.docstatus == 2:
 				frappe.throw(_("Cannot create trip for cancelled Transport Order {0}").format(self.transport_order))
+
+	def validate_driver_license(self):
+		"""SRS DRV-003: Block assignment of a driver whose licence has expired."""
+		if not self.driver:
+			return
+		if self.status in ("Completed", "Closed", "Cancelled"):
+			# Historical trips are not blocked.
+			return
+		expiry = frappe.db.get_value("Driver", self.driver, "license_expiry")
+		if expiry and getdate(expiry) < getdate(today()):
+			frappe.throw(
+				_("Driver {0}'s license expired on {1}. Renew before assigning to a trip.").format(
+					self.driver, expiry
+				)
+			)
+
+	def set_defaults_from_settings(self):
+		"""Default transaction currency to company base currency if unset."""
+		if self.transaction_currency:
+			return
+		settings = frappe.get_cached_doc("Transport Settings")
+		if settings.base_currency:
+			self.transaction_currency = settings.base_currency
+			if not self.exchange_rate:
+				self.exchange_rate = 1
 
 	def fetch_rate_card(self):
 		"""Auto-fetch rate from active rate card if customer + route set and no revenue yet."""
@@ -41,17 +68,28 @@ class Trip(Document):
 					self.revenue = self.rate_applied
 
 	def calculate_planned_totals(self):
-		self.total_planned_cost = sum(flt(row.planned_amount) for row in self.planned_costs)
+		rate = flt(self.exchange_rate) or 1
+		total = 0
+		for row in self.planned_costs:
+			total += flt(row.planned_amount)
+			row.base_planned_amount = flt(row.planned_amount) * rate
+		self.total_planned_cost = total
+		self.base_budget_amount = flt(self.budget_amount) * rate
 
 	def calculate_actual_costs(self):
+		rate = flt(self.exchange_rate) or 1
 		planned_map = {}
 		for row in self.planned_costs:
-			planned_map[row.cost_type] = flt(row.planned_amount)
+			key = row.expense_category or row.cost_type
+			if key:
+				planned_map[key] = flt(row.planned_amount)
 
 		total_actual = 0
 		for row in self.actual_costs:
-			row.planned_amount = planned_map.get(row.cost_type, 0)
+			key = row.expense_category or row.cost_type
+			row.planned_amount = planned_map.get(key, 0)
 			row.variance = flt(row.actual_amount) - flt(row.planned_amount)
+			row.base_actual_amount = flt(row.actual_amount) * rate
 			total_actual += flt(row.actual_amount)
 
 		self.total_actual_cost = total_actual
@@ -114,8 +152,8 @@ class Trip(Document):
 
 	@frappe.whitelist()
 	def start_trip(self):
-		if self.status != "Draft":
-			frappe.throw(_("Only Draft trips can be started"))
+		if self.status not in ("Planned", "Approved", "Dispatched", "Draft"):
+			frappe.throw(_("Only Planned / Approved / Dispatched trips can be started"))
 		self.status = "In Progress"
 		self.actual_start_date = frappe.utils.today()
 		self.append("checkpoints", {
@@ -173,6 +211,9 @@ class Trip(Document):
 		si = frappe.new_doc("Sales Invoice")
 		si.customer = self.customer
 		si.due_date = frappe.utils.add_days(frappe.utils.today(), 30)
+		if self.transaction_currency:
+			si.currency = self.transaction_currency
+			si.conversion_rate = flt(self.exchange_rate) or 1
 
 		si.append("items", {
 			"item_name": f"Transport Service - {self.name}",
@@ -190,6 +231,7 @@ class Trip(Document):
 		si.insert()
 
 		self.sales_invoice = si.name
+		self.invoice_status = "Invoiced"
 		self.save()
 
 		frappe.msgprint(

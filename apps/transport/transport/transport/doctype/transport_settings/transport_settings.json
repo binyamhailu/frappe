@@ -1,0 +1,182 @@
+{
+  "actions": [],
+  "creation": "2026-04-27 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "section_break_company",
+    "default_company",
+    "column_break_company",
+    "base_currency",
+    "section_break_accounts",
+    "default_cash_account",
+    "default_bank_account",
+    "column_break_accounts",
+    "driver_advance_account",
+    "transport_revenue_account",
+    "section_break_prepaid",
+    "default_prepaid_fuel_account",
+    "column_break_prepaid",
+    "default_prepaid_toll_account",
+    "section_break_matching",
+    "matching_date_tolerance_days",
+    "column_break_matching",
+    "require_exchange_rate",
+    "section_break_notes",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "section_break_company",
+      "fieldtype": "Section Break",
+      "label": "Company"
+    },
+    {
+      "fieldname": "default_company",
+      "fieldtype": "Link",
+      "label": "Default Company",
+      "options": "Company",
+      "description": "Company used when posting journal entries from Transport cost sources."
+    },
+    {
+      "fieldname": "column_break_company",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fetch_from": "default_company.default_currency",
+      "fieldname": "base_currency",
+      "fieldtype": "Link",
+      "label": "Base Currency",
+      "options": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_break_accounts",
+      "fieldtype": "Section Break",
+      "label": "Default Accounts"
+    },
+    {
+      "fieldname": "default_cash_account",
+      "fieldtype": "Link",
+      "label": "Default Cash Account",
+      "options": "Account",
+      "description": "Credited when HO Cashier or Log Cashier records a cash payment."
+    },
+    {
+      "fieldname": "default_bank_account",
+      "fieldtype": "Link",
+      "label": "Default Bank Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "column_break_accounts",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "driver_advance_account",
+      "fieldtype": "Link",
+      "label": "Driver Advance Account",
+      "options": "Account",
+      "description": "Asset account: debited when advance is issued, credited when settled."
+    },
+    {
+      "fieldname": "transport_revenue_account",
+      "fieldtype": "Link",
+      "label": "Transport Revenue Account",
+      "options": "Account",
+      "description": "Income account credited when a trip invoice is posted."
+    },
+    {
+      "fieldname": "section_break_prepaid",
+      "fieldtype": "Section Break",
+      "label": "Prepaid Defaults"
+    },
+    {
+      "fieldname": "default_prepaid_fuel_account",
+      "fieldtype": "Link",
+      "label": "Default Prepaid Fuel Account",
+      "options": "Account",
+      "description": "Used if a Prepaid Account record does not specify its own GL account."
+    },
+    {
+      "fieldname": "column_break_prepaid",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "default_prepaid_toll_account",
+      "fieldtype": "Link",
+      "label": "Default Prepaid Toll Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "section_break_matching",
+      "fieldtype": "Section Break",
+      "label": "Matching & Controls"
+    },
+    {
+      "default": "1",
+      "fieldname": "matching_date_tolerance_days",
+      "fieldtype": "Int",
+      "label": "Matching Date Tolerance (Days)",
+      "description": "Fuel/toll usage within ±N days of trip dates will match."
+    },
+    {
+      "fieldname": "column_break_matching",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "require_exchange_rate",
+      "fieldtype": "Check",
+      "label": "Require Exchange Rate for Non-Base Currency",
+      "description": "If enabled, cost sources in a non-base currency cannot be submitted without an exchange rate. (SRS CUR-004)"
+    },
+    {
+      "fieldname": "section_break_notes",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text",
+      "label": "Notes"
+    }
+  ],
+  "issingle": 1,
+  "links": [],
+  "modified": "2026-04-27 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Transport",
+  "name": "Transport Settings",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 0,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Accounts Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "quick_entry": 0,
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

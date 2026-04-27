@@ -8,10 +8,12 @@
     "naming_series",
     "driver_name",
     "license_number",
+    "license_expiry",
     "phone",
     "column_break_1",
     "status",
     "assigned_truck",
+    "employment_type",
     "section_break_notes",
     "notes"
   ],
@@ -39,6 +41,12 @@
       "unique": 1
     },
     {
+      "fieldname": "license_expiry",
+      "fieldtype": "Date",
+      "label": "License Expiry",
+      "description": "Drivers with expired licenses cannot be assigned to new trips (SRS DRV-003)."
+    },
+    {
       "fieldname": "phone",
       "fieldtype": "Data",
       "label": "Phone",
@@ -62,6 +70,13 @@
       "fieldtype": "Link",
       "label": "Assigned Truck",
       "options": "Truck"
+    },
+    {
+      "default": "Employee",
+      "fieldname": "employment_type",
+      "fieldtype": "Select",
+      "label": "Employment Type",
+      "options": "Employee\nContractor"
     },
     {
       "fieldname": "section_break_notes",

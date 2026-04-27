@@ -1,0 +1,46 @@
+{
+  "actions": [],
+  "creation": "2026-04-27 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "company",
+    "expense_account",
+    "default_cost_center"
+  ],
+  "fields": [
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "expense_account",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Expense Account",
+      "options": "Account",
+      "reqd": 1
+    },
+    {
+      "fieldname": "default_cost_center",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Default Cost Center",
+      "options": "Cost Center"
+    }
+  ],
+  "istable": 1,
+  "links": [],
+  "modified": "2026-04-27 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Transport",
+  "name": "Expense Category Account",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "creation",
+  "sort_order": "DESC"
+}

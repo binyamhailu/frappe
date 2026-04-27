@@ -1,0 +1,105 @@
+{
+  "actions": [],
+  "autoname": "field:category_name",
+  "creation": "2026-04-27 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "category_name",
+    "category_type",
+    "column_break_1",
+    "is_active",
+    "section_break_mappings",
+    "mappings",
+    "section_break_notes",
+    "description"
+  ],
+  "fields": [
+    {
+      "fieldname": "category_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Category Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "default": "Variable",
+      "fieldname": "category_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Category Type",
+      "options": "Variable\nFixed\nDriver-Related\nPrepaid"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Is Active"
+    },
+    {
+      "fieldname": "section_break_mappings",
+      "fieldtype": "Section Break",
+      "label": "Accounting Mappings"
+    },
+    {
+      "description": "GL account to debit per company when a cost of this category is posted. Required before any cost source can post a journal.",
+      "fieldname": "mappings",
+      "fieldtype": "Table",
+      "label": "Account Mappings",
+      "options": "Expense Category Account"
+    },
+    {
+      "fieldname": "section_break_notes",
+      "fieldtype": "Section Break",
+      "label": "Description"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text",
+      "label": "Description"
+    }
+  ],
+  "links": [],
+  "modified": "2026-04-27 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Transport",
+  "name": "Expense Category",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Accounts Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "quick_entry": 1,
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "track_changes": 1
+}
