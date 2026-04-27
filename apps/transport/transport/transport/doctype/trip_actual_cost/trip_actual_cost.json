@@ -29,7 +29,7 @@
       "fieldtype": "Select",
       "in_list_view": 1,
       "label": "Cost Type (Legacy)",
-      "options": "\nDiesel/Fuel\nToll Fees\nPermits\nDriver Allowance\nMileage\nRepairs\nOther"
+      "options": "\nDiesel/Fuel\nToll Fees\nPermits\nDriver Allowance\nMileage\nRepairs\nBorder Fees\nLoading & Offloading\nOther"
     },
     {
       "fieldname": "description",

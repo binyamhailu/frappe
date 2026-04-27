@@ -709,6 +709,12 @@ def _create_orders_and_trips():
 
 		trip_data = s["trip"].copy()
 		trip_data["transport_order"] = order.name
+		# Back-fill expense_category Link from cost_type string so rows are
+		# aligned with the new SRS-aligned model from day one.
+		for bucket in ("planned_costs", "actual_costs"):
+			for row in trip_data.get(bucket, []):
+				if row.get("cost_type") and not row.get("expense_category"):
+					row["expense_category"] = row["cost_type"]
 
 		trip = frappe.get_doc({"doctype": "Trip", **trip_data})
 		trip.insert(ignore_permissions=True)
